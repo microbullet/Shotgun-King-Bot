@@ -1,26 +1,26 @@
-# This example requires the 'message_content' privileged intents
-
-import os
 import discord
+import random 
+import os
+import json
+from discord.ui import Button, View
 from discord.ext import commands
+from asyncio import sleep
 
+with open('config.json', 'r') as cfg:
+    data = json.load(cfg) 
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+
+client = commands.Bot(command_prefix="::", intents=intents)
 
 
-@bot.event
+@client.event
 async def on_ready():
-    print(f"Logged in as {bot.user}")
+  print(f'We have logged in as {client.user}')
 
-@bot.command()
+@client.slash_command(name="ping", description="Get the bot's latency")
 async def ping(ctx):
-    await ctx.send('pong')
+    await ctx.respond(f"Pong! Latency is {client.latency}")
 
-@bot.command()
-async def hello(ctx):
-    await ctx.send("Choo choo! 🚅")
-
-
-bot.run(os.environ["DISCORD_TOKEN"])
+client.run(data["token"])
