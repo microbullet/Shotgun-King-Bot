@@ -22,6 +22,6 @@ async def ping(ctx):
 
 @client.command(description="Sends the bot's latency.") # this decorator makes a slash command
 async def ping(ctx): # a slash command will be created with the name "ping"
-    await ctx.respond(f"Pong! Latency is {bot.latency}")
+    await ctx.respond(f"Pong! Latency is {client.latency}")
 
 client.run(os.environ["DISCORD_TOKEN"])
