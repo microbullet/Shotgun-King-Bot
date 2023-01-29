@@ -1,5 +1,6 @@
 import discord
 from discord import app_commands
+import os
 
 class aclient(discord.Client):
     def __init_(self):
