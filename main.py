@@ -26,7 +26,7 @@ tree = app_commands.CommandTree(client)
 async def self(interaction: discord.Interaction, name: str):
     await interaction.response.send_message(f"Hello {name}! I was made with Discord.py!")
 
-@tree.command(name="ping", description="pong", guild=discord.Object(id=gid))
+@tree.command(name="pingg", description="pong", guild=discord.Object(id=gid))
 async def self(interaction: discord.Interaction):
     await interaction.response.send_message("Pong")
 
