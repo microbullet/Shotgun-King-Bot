@@ -6,9 +6,6 @@ from discord.ui import Button, View
 from discord.ext import commands
 from asyncio import sleep
 
-with open('config.json', 'r') as cfg:
-    data = json.load(cfg) 
-
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -23,4 +20,4 @@ async def on_ready():
 async def ping(ctx):
     await ctx.respond(f"Pong! Latency is {client.latency}")
 
-client.run(data["token"])
+client.run(os.environ["DISCORD_TOKEN"])
