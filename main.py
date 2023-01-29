@@ -12,4 +12,9 @@ tree = app_commands.CommandTree(client)
 async def first_command(interaction):
     await interaction.response.send_message("Hello!")
 
+@client.event
+async def on_ready():
+    await tree.sync(guild=discord.Object(id=883968176155664405))
+    print("Ready!")
+
 client.run(os.environ["DISCORD_TOKEN"])
