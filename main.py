@@ -2,21 +2,14 @@
 
 import os
 import discord
-from discord.ext import commands
-
+from discord import app_commands
 
 intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
+client = discord.Client(intents=intents)
+tree = app_commands.CommandTree(client)
 
-greetings = bot.create_group("greetings", "Greet people")
+@tree.command(name = "commandname", description = "My first application Command", guild=discord.Object(id=12417128931)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+async def first_command(interaction):
+    await interaction.response.send_message("Hello!")
 
-@greetings.command()
-async def hello(ctx):
-  await ctx.respond(f"Hello, {ctx.author}!")
-
-@greetings.command()
-async def bye(ctx):
-  await ctx.respond(f"Bye, {ctx.author}!")
-
-bot.run(os.environ["DISCORD_TOKEN"])
+client.run(os.environ["DISCORD_TOKEN"])
