@@ -1,22 +1,26 @@
-import discord
-import random 
+# This example requires the 'message_content' privileged intents
+
 import os
-import json
-from discord.ui import Button, View
+import discord
 from discord.ext import commands
-from asyncio import sleep
+
 
 intents = discord.Intents.default()
 intents.message_content = True
+bot = commands.Bot(command_prefix='!', intents=intents)
 
-client = commands.Bot(command_prefix="::", intents=intents)
 
-@client.event
+@bot.event
 async def on_ready():
-  print(f'We have logged in as {client.user}')
+    print(f"Logged in as {bot.user}")
 
-@client.command(description="Sends the bot's latency.") # this decorator makes a slash command
-async def ping(ctx): # a slash command will be created with the name "ping"
-    await ctx.respond(f"Pong! Latency is {client.latency}")
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
 
-client.run(os.environ["DISCORD_TOKEN"])
+@bot.command()
+async def hello(ctx):
+    await ctx.send("Choo choo! 🚅")
+
+
+bot.run(os.environ["DISCORD_TOKEN"])
