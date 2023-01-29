@@ -21,7 +21,7 @@ async def add(ctx: discord.ApplicationContext, num1: int, num2: int):
     await ctx.respond(f"The sum of these numbers is **{num1+num2}**")
 
 
-bot.add_application_command(math)
+bot.add_application_command(random)
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
