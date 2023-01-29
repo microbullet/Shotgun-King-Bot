@@ -22,7 +22,6 @@ class aclient(discord.Client):
 client = aclient()
 tree = app_commands.CommandTree(client)
 
-math = discord.SlashCommandGroup("math", "Commands related to mathematics.")
 
 @tree.command(name="test", description="testing", guild=discord.Object(id=gid))
 async def self(interaction: discord.Interaction, name: str):
