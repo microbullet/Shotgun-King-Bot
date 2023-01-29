@@ -2,8 +2,6 @@ import discord
 from discord import app_commands
 import os
 
-bot = discord.Bot(debug_guilds=[...])
-
 
 punkcan = 535849677858275329
 gid = 883968176155664405
@@ -23,10 +21,6 @@ class aclient(discord.Client):
 
 client = aclient()
 tree = app_commands.CommandTree(client)
-
-math = bot.create_group(
-    "math", "Commands related to mathematics."
-) 
 
 @tree.command(name="test", description="testing", guild=discord.Object(id=gid))
 async def self(interaction: discord.Interaction, name: str):
