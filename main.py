@@ -11,7 +11,7 @@ class aclient(discord.Client):
     async def on_ready(self):
         await self.wait_until_ready()
         if not self.synced:
-            await tree.sync(guild=discord.Object(id=908141823288045568))
+            await tree.sync(guild=discord.Object(id=883968176155664405))
             self.synced = True
         print(f"We have logged in as {self.user}.")
 
@@ -20,7 +20,7 @@ client = aclient()
 tree = app_commands.CommandTree(client)
 
 
-@tree.command(name="test", description="testing", guild=discord.Object(id=908141823288045568))
+@tree.command(name="test", description="testing", guild=discord.Object(id=883968176155664405))
 async def self(interaction: discord.Interaction, name: str):
     await interaction.response.send_message(f"Hello {name}! I was made with Discord.py!")
 
