@@ -15,8 +15,8 @@ client = commands.Bot(command_prefix="::", intents=intents)
 async def on_ready():
   print(f'We have logged in as {client.user}')
 
-@client.slash_command(name="ping", description="Get the bot's latency")
-async def ping(ctx):
+@client.command(description="Sends the bot's latency.") # this decorator makes a slash command
+async def ping(ctx): # a slash command will be created with the name "ping"
     await ctx.respond(f"Pong! Latency is {client.latency}")
 
 client.run(os.environ["DISCORD_TOKEN"])
