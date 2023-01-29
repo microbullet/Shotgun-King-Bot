@@ -12,14 +12,6 @@ tree = app_commands.CommandTree(client)
 async def first_command(interaction):
     await interaction.response.send_message("Hello!")
 
-@tree.command(name='sync', description='Owner only')
-async def sync(interaction: discord.Interaction):
-    if interaction.user.id == 508066804485324831:
-        await tree.sync()
-        print('Command tree synced.')
-    else:
-        await interaction.response.send_message('You must be the owner to use this command!')
-
 @client.event
 async def on_ready():
     await tree.sync(guild=discord.Object(id=883968176155664405))
