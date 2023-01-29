@@ -9,18 +9,14 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+greetings = bot.create_group("greetings", "Greet people")
 
-@bot.event
-async def on_ready():
-    print(f"Logged in as {bot.user}")
-
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
-
-@bot.command()
+@greetings.command()
 async def hello(ctx):
-    await ctx.send("Choo choo! 🚅")
+  await ctx.respond(f"Hello, {ctx.author}!")
 
+@greetings.command()
+async def bye(ctx):
+  await ctx.respond(f"Bye, {ctx.author}!")
 
 bot.run(os.environ["DISCORD_TOKEN"])
