@@ -3,7 +3,7 @@ from discord import app_commands
 import os
 
 class aclient(discord.Client):
-    def __init_(self):
+    def __init__(self):
         super().__init__(intents=discord. Intents.default())
         self.synced = False
 
@@ -15,7 +15,7 @@ class aclient(discord.Client):
         print (f"We have logged in as {self.user}.")
 
 client = aclient()
-tree=app_commands.CommandTree (client)
+tree = app_commands.CommandTree(client)
 
 @tree.command (name = "test", description = "testing", guild = discord. Object (id = 908141823288045568))
 async def self(interaction: discord. Interaction, name: str):
