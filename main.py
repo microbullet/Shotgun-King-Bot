@@ -23,4 +23,4 @@ async def add(ctx: discord.ApplicationContext, num1: int, num2: int):
 bot.add_application_command(math)
 
 if __name__ == "__main__": 
-    client.run(os.environ["DISCORD_TOKEN"])
+    bot.run(os.environ["DISCORD_TOKEN"])
