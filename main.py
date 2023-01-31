@@ -1,7 +1,8 @@
 import discord
+import discord.ext as commands
 import os
 
-bot = discord.Bot(command_prefix="!")
+bot = commands.Bot(command_prefix="!")
 
 # If you use commands.Bot, @bot.slash_command should be used for
 # slash commands. You can use @bot.slash_command with discord.Bot as well.
