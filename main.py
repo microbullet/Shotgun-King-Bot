@@ -1,27 +1,14 @@
 import discord
-import os
+import os # default module
 
-bot = discord.Bot(command_prefix="!")
+bot = discord.Bot()
 
-# If you use commands.Bot, @bot.slash_command should be used for
-# slash commands. You can use @bot.slash_command with discord.Bot as well.
+@bot.event
+async def on_ready():
+    print(f"{bot.user} is ready and online!")
 
-math = bot.create_group(
-    "math", "Commands related to mathematics."
-)  # Create a slash command group
+@bot.slash_command(name = "hello", description = "Say hello to the bot")
+async def hello(ctx):
+    await ctx.respond("Hey!")
 
-# Another way, creating the class manually:
-
-math = discord.SlashCommandGroup("math", "Commands related to mathematics.")
-
-
-@math.command()  # Create a slash command under the math group
-async def add(ctx: discord.ApplicationContext, num1: int, num2: int):
-    """Get the sum of 2 integers."""
-    await ctx.respond(f"The sum of these number is **{num1+num2}**")
-
-
-bot.add_application_command(math)
-
-if __name__ == "__main__": 
-    bot.run(os.environ["DISCORD_TOKEN"])
+bot.run("MTA2OTA2MzIzNTk4NDE3MTA0OQ.GiPpcb.EraypgpBEOcu2FK2CqFt7_H91LPvU0N4WOl3R0")
