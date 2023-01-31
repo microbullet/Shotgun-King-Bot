@@ -1,8 +1,9 @@
 import discord
+import discord.ext as de
 from discord import app_commands as apc
 class Generalgroup(apc.Group):
     """Manage general commands"""
-    def __init__(self, bot: discord.ext.commands.Bot):
+    def __init__(self, bot: de.commands.Bot):
         super().__init__()
         self.bot = bot
 
