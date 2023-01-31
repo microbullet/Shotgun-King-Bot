@@ -6,7 +6,8 @@ from discord.ext import commands
 import os
 
 bot = discord.Bot(command_prefix='!', intents=discord.Intents.default())
-
+attributes = dir(bot)
+print(attributes)
 
 punkcan = 535849677858275329
 gid = 883968176155664405
@@ -47,3 +48,4 @@ async def subcommand(ctx):
 
 if __name__ == "__main__": 
     client.run(os.environ["DISCORD_TOKEN"])
+    
