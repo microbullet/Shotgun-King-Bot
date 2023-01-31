@@ -5,7 +5,7 @@ from discord.ext.commands import Greedy, Context
 from discord.ext import commands
 import os
 
-bot = discord.Bot(command_prefix='!')
+bot = discord.Bot(command_prefix='!', intents=discord.Intents.default())
 
 
 punkcan = 535849677858275329
