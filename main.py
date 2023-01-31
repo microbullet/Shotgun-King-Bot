@@ -1,20 +1,42 @@
 import discord
-import simplegeneralgroup
+from discord import app_commands
 import os
-import discord.ext as de
-MY_GUILD = discord.Object(id=1234567890)
 
-class MyBot(discord.ext.commands.Bot):
+
+punkcan = 535849677858275329
+gid = 883968176155664405
+
+class aclient(discord.Client):
+    def __init__(self):
+        super().__init__(intents=discord.Intents.default())
+        self.synced = False
+
     async def on_ready(self):
-        await self.tree.sync(guild=MY_GUILD)
+        await self.wait_until_ready()
+        if not self.synced:
+            await tree.sync(guild=discord.Object(id=gid))
+            self.synced = True
+        print(f"We have logged in as {self.user}.")
 
-bot: de.commands.Bot = MyBot
 
-@bot.tree.command(guild=MY_GUILD)
-async def slash(interaction: discord.Interaction, number: int, string: str):
-    await interaction.response.send_message(f'Modify {number=} {string=}', ephemeral=True)
+client = aclient()
+tree = app_commands.CommandTree(client)
 
-bot.tree.add_command(simplegeneralgroup.Generalgroup(bot), guild=MY_GUILD)
+@tree.command(name="test", description="testing", guild=discord.Object(id=gid))
+async def self(interaction: discord.Interaction, name: str):
+    await interaction.response.send_message(f"Hello {name}! I was made with Discord.py!")
 
-if __name__ == "__main__":
-    bot.run(os.environ["DISCORD_TOKEN"])
+@tree.command(name="pingg", description="pong", guild=discord.Object(id=gid))
+async def self(interaction: discord.Interaction):
+    await interaction.response.send_message("Pong")
+
+@tree.group(name="howto", invoke_without_command=True)
+async def howto():
+    pass
+
+@howto.command(name="install mods")
+async def self(interaction: discord.Interaction):
+    await interaction.response.send_message("I dont know man ask etilon or something")
+
+if __name__ == "__main__": 
+    client.run(os.environ["DISCORD_TOKEN"])
