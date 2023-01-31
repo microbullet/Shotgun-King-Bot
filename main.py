@@ -1,6 +1,7 @@
 import discord
+import os
 
-bot = discord.Bot(debug_guilds=[...])
+bot = discord.Bot(command_prefix="!")
 
 # If you use commands.Bot, @bot.slash_command should be used for
 # slash commands. You can use @bot.slash_command with discord.Bot as well.
