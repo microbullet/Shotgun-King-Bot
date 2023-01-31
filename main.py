@@ -1,6 +1,11 @@
 import discord
 from discord import app_commands
+from typing import Literal, Optional
+from discord.ext.commands import Greedy, Context
+from discord.ext import commands
 import os
+
+bot = discord.Bot(command_prefix='!')
 
 
 punkcan = 535849677858275329
@@ -30,13 +35,15 @@ async def self(interaction: discord.Interaction, name: str):
 async def self(interaction: discord.Interaction):
     await interaction.response.send_message("Pong")
 
-@tree.group(name="howto", invoke_without_command=True)
-async def howto():
-    pass
+# ------------------
 
-@howto.command(name="install mods")
-async def self(interaction: discord.Interaction):
-    await interaction.response.send_message("I dont know man ask etilon or something")
+@bot.group(invoke_without_command=True)
+async def your_command(ctx):
+    await ctx.send("This is your command.")
+
+@your_command.command()
+async def subcommand(ctx):
+    await ctx.send("This is a subcommand.")
 
 if __name__ == "__main__": 
     client.run(os.environ["DISCORD_TOKEN"])
