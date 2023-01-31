@@ -1,27 +1,19 @@
 import discord
-from discord import app_commands
+import simplegeneralgroup
 import os
+MY_GUILD = discord.Object(id=1234567890)
 
-punkcan = 535849677858275329
-gid = 883968176155664405
+class MyBot(discord.ext.commands.Bot):
+    async def on_ready(self):
+        await self.tree.sync(guild=MY_GUILD)
 
-bot = discord.Bot()
+bot: discord.ext.commands.Bot = MyBot
 
-# If you use commands.Bot, @bot.slash_command should be used for
-# slash commands. You can use @bot.slash_command with discord.Bot as well.
+@bot.tree.command(guild=MY_GUILD)
+async def slash(interaction: discord.Interaction, number: int, string: str):
+    await interaction.response.send_message(f'Modify {number=} {string=}', ephemeral=True)
 
-random = bot.create_group(
-    "random", "gives a random thing based on the sub"
-)
+bot.tree.add_command(simplegeneralgroup.Generalgroup(bot), guild=MY_GUILD)
 
-
-@random.command()  # Create a slash command under the math group
-async def add(ctx: discord.ApplicationContext, num1: int, num2: int):
-    """Get the sum of 2 integers."""
-    await ctx.respond(f"The sum of these numbers is **{num1+num2}**")
-
-
-bot.add_application_command(random)
-
-
-bot.run(os.environ["DISCORD_TOKEN"])
+if __name__ == "__main__":
+    bot.run(os.environ["DISCORD_TOKEN"])
