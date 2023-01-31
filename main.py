@@ -1,48 +1,23 @@
 import discord
-from discord import app_commands
-from typing import Literal, Optional
-from discord.ext.commands import Greedy, Context
-from discord.ext import commands
-import os
 
-bot = discord.Bot(command_prefix='!', intents=discord.Intents.default())
+bot = discord.Bot(debug_guilds=[...])
 
-punkcan = 535849677858275329
-gid = 883968176155664405
+# If you use commands.Bot, @bot.slash_command should be used for
+# slash commands. You can use @bot.slash_command with discord.Bot as well.
 
-class aclient(discord.Client):
-    def __init__(self):
-        super().__init__(intents=discord.Intents.default())
-        self.synced = False
+math = bot.create_group(
+    "math", "Commands related to mathematics."
+)  # Create a slash command group
 
-    async def on_ready(self):
-        await self.wait_until_ready()
-        if not self.synced:
-            await tree.sync(guild=discord.Object(id=gid))
-            self.synced = True
-        print(f"We have logged in as {self.user}.")
+# Another way, creating the class manually:
+
+math = discord.SlashCommandGroup("math", "Commands related to mathematics.")
 
 
-client = aclient()
-tree = app_commands.CommandTree(client)
+@math.command()  # Create a slash command under the math group
+async def add(ctx: discord.ApplicationContext, num1: int, num2: int):
+    """Get the sum of 2 integers."""
+    await ctx.respond(f"The sum of these numbers is **{num1+num2}**")
 
-@tree.command(name="test", description="testing", guild=discord.Object(id=gid))
-async def self(interaction: discord.Interaction, name: str):
-    await interaction.response.send_message(f"Hello {name}! I was made with Discord.py!")
 
-@tree.command(name="pingg", description="pong", guild=discord.Object(id=gid))
-async def self(interaction: discord.Interaction):
-    await interaction.response.send_message("Pong")
-
-# ------------------
-
-@bot.group(invoke_without_command=True)
-async def your_command(ctx):
-    await ctx.send("This is your command.")
-
-@your_command.command()
-async def subcommand(ctx):
-    await ctx.send("This is a subcommand.")
-
-if __name__ == "__main__": 
-    client.run(os.environ["DISCORD_TOKEN"])
+bot.add_application_command(math)
