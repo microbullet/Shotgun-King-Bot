@@ -43,7 +43,7 @@ async def your_command(ctx):
 
 @your_command.command()
 async def subcommand(ctx):
-    await ctx.send("This is a subcommand")
+    await ctx.send("This is a subcommand.")
 
 if __name__ == "__main__": 
     client.run(os.environ["DISCORD_TOKEN"])
